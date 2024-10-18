@@ -1,0 +1,76 @@
+2024-10-18 14:20:13 - APIError: Gemini API Error: ("Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 3. The candidate's safety_ratings are: [category: HARM_CATEGORY_SEXUALLY_EXPLICIT\nprobability: NEGLIGIBLE\n, category: HARM_CATEGORY_HATE_SPEECH\nprobability: NEGLIGIBLE\n, category: HARM_CATEGORY_HARASSMENT\nprobability: MEDIUM\n, category: HARM_CATEGORY_DANGEROUS_CONTENT\nprobability: NEGLIGIBLE\n].", [category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+probability: NEGLIGIBLE
+, category: HARM_CATEGORY_HATE_SPEECH
+probability: NEGLIGIBLE
+, category: HARM_CATEGORY_HARASSMENT
+probability: MEDIUM
+, category: HARM_CATEGORY_DANGEROUS_CONTENT
+probability: NEGLIGIBLE
+])
+2024-10-18 14:20:44 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:47 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:47 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:48 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:48 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:20:52 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:44 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:44 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:47 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:48 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:48 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:21:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:13 - APIError: Gemini API Error: ("Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 3. The candidate's safety_ratings are: [category: HARM_CATEGORY_SEXUALLY_EXPLICIT\nprobability: NEGLIGIBLE\n, category: HARM_CATEGORY_HATE_SPEECH\nprobability: NEGLIGIBLE\n, category: HARM_CATEGORY_HARASSMENT\nprobability: MEDIUM\n, category: HARM_CATEGORY_DANGEROUS_CONTENT\nprobability: NEGLIGIBLE\n].", [category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+probability: NEGLIGIBLE
+, category: HARM_CATEGORY_HATE_SPEECH
+probability: NEGLIGIBLE
+, category: HARM_CATEGORY_HARASSMENT
+probability: MEDIUM
+, category: HARM_CATEGORY_DANGEROUS_CONTENT
+probability: NEGLIGIBLE
+])
+2024-10-18 14:28:38 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:41 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:41 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:45 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:48 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:48 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:52 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:28:52 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:44 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:45 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:45 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:49 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:50 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:51 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:29:52 - APIError: Gemini API Error: 429 Resource has been exhausted (e.g. check quota).
+2024-10-18 14:33:29 - APIError: Gemini API Error: ("Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 3. The candidate's safety_ratings are: [category: HARM_CATEGORY_SEXUALLY_EXPLICIT\nprobability: NEGLIGIBLE\n, category: HARM_CATEGORY_HATE_SPEECH\nprobability: NEGLIGIBLE\n, category: HARM_CATEGORY_HARASSMENT\nprobability: MEDIUM\n, category: HARM_CATEGORY_DANGEROUS_CONTENT\nprobability: NEGLIGIBLE\n].", [category: HARM_CATEGORY_SEXUALLY_EXPLICIT
+probability: NEGLIGIBLE
+, category: HARM_CATEGORY_HATE_SPEECH
+probability: NEGLIGIBLE
+, category: HARM_CATEGORY_HARASSMENT
+probability: MEDIUM
+, category: HARM_CATEGORY_DANGEROUS_CONTENT
+probability: NEGLIGIBLE
+])

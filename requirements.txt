@@ -1,0 +1,8 @@
+openai
+tiktoken
+google-generativeai
+streamlit
+python-dotenv
+anthropic
+curl_cffi
+nltk
