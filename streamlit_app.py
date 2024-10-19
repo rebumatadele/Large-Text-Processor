@@ -375,7 +375,7 @@ if st.button("🚀 Process Text") and not st.session_state.processing:
                 results.append(response)
 
                 # Append response to chat buffer
-                st.session_state.chat_buffer = f"Chunk {j + 1}:\n{response}\n\n" + st.session_state.chat_buffer
+                st.session_state.chat_buffer = f"Chunk {j + 1}:\n{response}\n\n"
 
                 # Update the text area with the new chat buffer content without redefining the key
                 ai_responses_placeholder.text_area(
