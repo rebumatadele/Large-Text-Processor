@@ -27,7 +27,6 @@ def generate_with_anthropic(prompt, api_key):
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": 1024,
     }
-    print("headers: ", headers)
     try:
         response = post('https://api.anthropic.com/v1/messages', headers=headers, json=data, timeout=30)
 

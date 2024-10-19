@@ -21,13 +21,11 @@ def generate_with_gemini(prompt, model="gemini-1.5-flash"):
         response = model.generate_content(prompt)
 
         # Check if the response contains valid content
-        if not response:
-            handle_error("ProcessingError", "Gemini returned no valid content.")
-            return "[No valid content returned.]"
-            
-        return response.text
-
-    
+        ret = response.text
+        if ret is not None and ret.strip():
+            return response.text
+        handle_error("ProcessingError", "Gemini returned no valid content.")
+        return "[No valid content returned.]"
     except GEMINI_EXCEPTIONS as e:
         handle_error("APIError", f"Gemini API Error: {e}")
         return f"[Gemini API error: {e}]"

@@ -33,7 +33,6 @@ def initialize_providers(provider_choice, api_key):
     if provider_choice == "OpenAI":
         configure_openai(api_key)
     elif provider_choice == "Anthropic":
-        print("API KEY: ", api_key)
         configure_anthropic(api_key)
     elif provider_choice == "Gemini":
         configure_gemini(api_key)
@@ -42,7 +41,7 @@ def initialize_providers(provider_choice, api_key):
 st.set_page_config(page_title="Text Processor with Generative AI", page_icon="🤖", layout="wide")
 
 # Sidebar for configuration and management
-st.sidebar.title("Configuration & Management")
+st.sidebar.title("⚙️ Configuration & Management")
 st.sidebar.subheader("Provider Settings")
 
 # Select provider
@@ -72,7 +71,7 @@ api_key = st.sidebar.text_input(
 )
 
 # Configure the provider when the button is clicked
-if st.sidebar.button("Configure"):
+if st.sidebar.button("🔄 Configure", key="configure_button"):
     if api_key:
         try:
             initialize_providers(provider_choice, api_key)
@@ -83,7 +82,7 @@ if st.sidebar.button("Configure"):
         handle_error("InvalidInput", "Please enter a valid API key.")
 
 # Display error history in a collapsible section in the sidebar
-st.sidebar.subheader("Error Logs")
+st.sidebar.subheader("❗ Error Logs")
 with st.sidebar.expander("View Error History"):
     if st.session_state.errors:
         displayed_errors = st.session_state.errors[:50]  # Display only the latest 50 errors
@@ -93,16 +92,16 @@ with st.sidebar.expander("View Error History"):
         st.write("No errors logged yet.")
 
 # Button to clear error logs
-if st.sidebar.button("Clear Errors"):
+if st.sidebar.button("🧹 Clear Errors"):
     clear_error_logs()
 
 # Button to clear cache
-st.sidebar.subheader("Cache Management")
-if st.sidebar.button("Clear Cache"):
+st.sidebar.subheader("🗄️ Cache Management")
+if st.sidebar.button("🧹 Clear Cache"):
     clear_cache()
 
 # Prompt Management Section
-st.sidebar.subheader("Prompt Management")
+st.sidebar.subheader("✏️ Prompt Management")
 
 # Dropdown to select a saved prompt
 saved_prompts = list_saved_prompts()
@@ -125,14 +124,14 @@ st.subheader("Upload your .txt files and process them with AI Using Multiple Pro
 
 st.markdown("---")
 # Editable prompt area
-st.header("Prompt Template")
+st.header("✏️ Prompt Template")
 edited_prompt = st.text_area("Edit your prompt template", value=prompt_content, height=200)
 
 # Prompt management actions
 with st.sidebar.expander("Manage Prompts"):
     # Option to save the current prompt
     with st.form(key="save_prompt_form"):
-        st.write("### Save Current Prompt")
+        st.write("### 💾 Save Current Prompt")
         new_prompt_name = st.text_input("Prompt Name")
         save_prompt_button = st.form_submit_button("Save Prompt")
         if save_prompt_button:
@@ -145,7 +144,7 @@ with st.sidebar.expander("Manage Prompts"):
     # Option to delete a saved prompt
     if saved_prompts:
         with st.form(key="delete_prompt_form"):
-            st.write("### Delete a Prompt")
+            st.write("### 🗑️ Delete a Prompt")
             prompt_to_delete = st.selectbox("Select a prompt to delete", saved_prompts)
             delete_prompt_button = st.form_submit_button("Delete Prompt")
             if delete_prompt_button:
@@ -155,7 +154,7 @@ with st.sidebar.expander("Manage Prompts"):
                     st.sidebar.success(f"Prompt '{prompt_to_delete}' deleted successfully!")
 
 # Button to save the edited prompt (overwrites if it's the default prompt)
-if st.button("Save Current Prompt") and not st.session_state.get('processing', False):
+if st.button("💾 Save Current Prompt") and not st.session_state.get('processing', False):
     if selected_prompt == "Default Prompt":
         save_prompt("Default Prompt", edited_prompt)  # Save as 'Default Prompt'
     else:
@@ -183,7 +182,7 @@ if 'start_time' not in st.session_state:
     st.session_state.start_time = None
 
 # File uploader for multiple files with a dynamic key
-st.header("Upload Files")
+st.header("📁 Upload Files")
 uploaded_files = st.file_uploader(
     "Upload input text files", 
     type="txt", 
@@ -200,12 +199,15 @@ if uploaded_files and not st.session_state.processing:
                 file_content = uploaded_file.read().decode('utf-8')
                 st.session_state.file_contents[file_name] = file_content
                 st.session_state.uploaded_files.append(file_name)
+                st.success(f"📥 '{file_name}' uploaded successfully!")
             except Exception as e:
                 handle_error("ProcessingError", f"Error reading {file_name}: {e}")
+                st.error(f"❌ Error reading '{file_name}': {e}")
+
 
 # Clear button to clear the uploaded files and errors
 if st.session_state.file_contents and not st.session_state.processing:
-    if st.button("Clear Files and Outputs"):
+    if st.button("🧹 Clear Files and Outputs"):
         st.session_state.uploaded_files = []
         st.session_state.results = {}
         st.session_state.file_contents = {}
@@ -217,7 +219,7 @@ st.markdown("---")
 
 # Preview and edit section
 if st.session_state.file_contents and not st.session_state.processing:
-    st.header("Preview and Edit Files")
+    st.header("🔍 Preview and Edit File")
     selected_file = st.selectbox("Select a file to preview and edit", list(st.session_state.file_contents.keys()), key="file_selector")
     
     # Initialize the edited content in session state if it doesn't exist
@@ -236,15 +238,15 @@ if st.session_state.file_contents and not st.session_state.processing:
     if edited_content != st.session_state[f"edited_{selected_file}"]:
         st.session_state[f"edited_{selected_file}"] = edited_content
     
-    if st.button("Save Changes", key=f"save_{selected_file}") and not st.session_state.processing:
+    if st.button("💾 Save Changes", key=f"save_{selected_file}") and not st.session_state.processing:
         st.session_state.file_contents[selected_file] = edited_content
-        st.success(f"Changes to {selected_file} saved successfully!")
+        st.success(f"✅ Changes to {selected_file} saved successfully!")
         st.rerun()
 
 # Input for chunk size and chunk type (words, sentences, paragraphs)
-st.header("Processing Settings")
-chunk_size_input = st.number_input("Set chunk size", min_value=1, max_value=5000, value=500)
-chunk_by = st.selectbox("Chunk by", ["words", "sentences", "paragraphs"])
+st.header("⚙️ Processing Settings")
+chunk_size_input = st.number_input("🔢 Set chunk size", min_value=1, max_value=5000, value=500)
+chunk_by = st.selectbox("📐 Chunk by", ["words", "sentences", "paragraphs"])
 
 st.markdown("---")
 
@@ -257,7 +259,7 @@ status_placeholder = st.empty()
 
 # Button to process the files
 num_files = len(st.session_state.file_contents)
-if st.button("Process Text") and not st.session_state.processing:
+if st.button("🚀 Process Text") and not st.session_state.processing:
     # Define it once with a unique key outside the loop
     ai_responses_placeholder = st.empty()
 
@@ -266,7 +268,7 @@ if st.button("Process Text") and not st.session_state.processing:
         st.session_state.chat_buffer = ""
 
     ai_responses_placeholder.text_area(
-        "AI Responses", 
+        "🧠 AI Responses", 
         value=st.session_state.chat_buffer, 
         height=400, 
         key="chat_area", 
@@ -281,14 +283,14 @@ if st.button("Process Text") and not st.session_state.processing:
         progress_bar.progress(0)
         percentage_text.text("0% completed.")
         time_text.text("Estimated time remaining: Calculating...")
-        status_placeholder.text("Starting processing...")
+        status_placeholder.text("🟢 Starting processing...")
 
         # Reset the AI Responses text area
         ai_responses_placeholder.text_area(
-            "AI Responses", 
+            "🧠 AI Responses", 
             value=st.session_state.chat_buffer, 
             height=400, 
-            disabled=True
+            disabled=False
         )
 
         # Calculate total steps: splitting, processing, merging per file
@@ -302,7 +304,13 @@ if st.button("Process Text") and not st.session_state.processing:
 
         # Start time for estimating remaining time
         st.session_state.start_time = time.time()
+        # Split the file
+        status_placeholder.text(f"Splitting {file_name}...")
 
+        # Add file header to chat
+        st.session_state.chat_buffer += f"**{file_name}**:\n"
+        st.session_state.chat_buffer += "🔄 Splitting the file into chunks...\n\n"
+        
         # Processing logic
         for i, (file_name, file_content) in enumerate(st.session_state.file_contents.items()):
             # Check if file is already processed
@@ -311,17 +319,9 @@ if st.button("Process Text") and not st.session_state.processing:
                 current_step += (len(split_chunks) + 1)
                 progress_bar.progress(current_step / total_steps)
                 continue
-
-            # Split the file
-            status_placeholder.text(f"Splitting {file_name}...")
-
-            # Add file header to chat
-            st.session_state.chat_buffer += f"**{file_name}**:\n"
-            st.session_state.chat_buffer += "🔄 Splitting the file into chunks...\n\n"
-            
             # Update the text area with the new chat buffer content without redefining the key
             ai_responses_placeholder.text_area(
-                "AI Responses For Each Chunk", 
+                "🧠 AI Responses For Each Chunk", 
                 value=st.session_state.chat_buffer, 
                 height=400, 
                 disabled=False
@@ -356,11 +356,11 @@ if st.button("Process Text") and not st.session_state.processing:
                 results.append(response)
 
                 # Append response to chat buffer
-                st.session_state.chat_buffer += f"Chunk {j + 1}:\n{response}\n\n"
+                st.session_state.chat_buffer = f"Chunk {j + 1}:\n{response}\n\n" + st.session_state.chat_buffer
 
                 # Update the text area with the new chat buffer content without redefining the key
                 ai_responses_placeholder.text_area(
-                    "AI Responses For Each Chunk", 
+                    "🧠 AI Responses For Each Chunk", 
                     value=st.session_state.chat_buffer, 
                     height=400, 
                     disabled=False
@@ -412,13 +412,13 @@ if st.button("Process Text") and not st.session_state.processing:
 st.markdown("---")
 
 # Display results in a chat-like interface (Final Results)
-st.header("Final Results")
+st.header("📄 Final Results")
 with st.container():
     for file_name, response_text in st.session_state.results.items():
-        st.subheader(f"Output for {file_name}")
+        st.subheader(f"📑 Output for {file_name}")
         st.text_area(f"Output for {file_name}", value=response_text, height=300, key=f"final_output_{file_name}")
         st.download_button(
-            label=f"Download Output for {file_name}",
+            label=f"💾 Download Output for {file_name}",
             data=response_text,
             file_name=f"{sanitize_file_name(file_name)}_final.txt",
             mime="text/plain"
