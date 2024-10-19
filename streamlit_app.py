@@ -33,6 +33,7 @@ def initialize_providers(provider_choice, api_key):
     if provider_choice == "OpenAI":
         configure_openai(api_key)
     elif provider_choice == "Anthropic":
+        print("API KEY: ", api_key)
         configure_anthropic(api_key)
     elif provider_choice == "Gemini":
         configure_gemini(api_key)
@@ -118,6 +119,11 @@ if selected_prompt == "Default Prompt":
 else:
     prompt_content = load_prompt(selected_prompt)
 
+# Main layout
+st.title("Text Processor with Generative AI 🤖")
+st.subheader("Upload your .txt files and process them with AI Using Multiple Providers")
+
+st.markdown("---")
 # Editable prompt area
 st.header("Prompt Template")
 edited_prompt = st.text_area("Edit your prompt template", value=prompt_content, height=200)
