@@ -43,7 +43,7 @@ def generate_with_gemini(prompt, model="gemini-1.5-flash"):
                         return "[Content blocked due to safety concerns]"
             else:
                 handle_error("ProcessingError", "Gemini returned no content parts.")
-                return "[No content parts available from Gemini.]"
+                return "[No content parts available from Gemini due to SAFETY.]"
         else:
             # Log an error for no valid candidates or a blocked response
             handle_error("ProcessingError", "Gemini returned no valid candidates or the response was blocked.")
