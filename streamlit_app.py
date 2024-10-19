@@ -81,15 +81,34 @@ if st.sidebar.button("🔄 Configure", key="configure_button"):
     else:
         handle_error("InvalidInput", "Please enter a valid API key.")
 
-# Display error history in a collapsible section in the sidebar
+
+
+# Function to update error logs dynamically
+def update_error_logs():
+    with error_log_placeholder:
+        if st.session_state.errors:
+            displayed_errors = st.session_state.errors[:50]  # Display only the latest 50 errors
+            for error in displayed_errors:
+                st.write(error)
+        else:
+            st.write("No errors logged yet.")
+
+# Error Logging 
 st.sidebar.subheader("❗ Error Logs")
-with st.sidebar.expander("View Error History"):
-    if st.session_state.errors:
-        displayed_errors = st.session_state.errors[:50]  # Display only the latest 50 errors
-        for error in displayed_errors:
-            st.write(error)
-    else:
-        st.write("No errors logged yet.")
+
+# Create a row layout with columns for dropdown and refresh button
+col1, col2 = st.sidebar.columns([2, 1])
+
+with col1:
+    error_log_expander = st.expander("View Error History")
+    error_log_placeholder = error_log_expander.empty()
+
+with col2:
+    if st.button("🔄"):
+        update_error_logs()
+
+# Initial display of error logs
+update_error_logs()
 
 # Button to clear error logs
 if st.sidebar.button("🧹 Clear Errors"):

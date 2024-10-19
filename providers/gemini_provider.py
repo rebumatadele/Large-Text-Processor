@@ -13,28 +13,32 @@ except ImportError:
     # If specific exceptions are not available, use generic Exception
     GEMINI_EXCEPTIONS = (Exception,)
 
-@retry(max_retries=5, initial_wait=5, backoff_factor=2, exceptions=GEMINI_EXCEPTIONS)
+@retry(max_retries=10, initial_wait=2, backoff_factor=2, exceptions=GEMINI_EXCEPTIONS)
 def generate_with_gemini(prompt, model="gemini-1.5-flash"):
     try:
         # Ensure the API is configured
-        model = genai.GenerativeModel(model)
-        response = model.generate_content(prompt)
+        model_instance = genai.GenerativeModel(model)
+        response = model_instance.generate_content(prompt)
 
         # Check if the response contains valid content
         ret = response.text
         if ret is not None and ret.strip():
-            return response.text
-        handle_error("ProcessingError", "Gemini returned no valid content.")
-        return "[No valid content returned.]"
+            return ret
+        else:
+            handle_error("ProcessingError", "Gemini returned no valid content.")
+            raise ValueError("Gemini returned no valid content.")
+
     except GEMINI_EXCEPTIONS as e:
         handle_error("APIError", f"Gemini API Error: {e}")
-        return f"[Gemini API error: {e}]"
+        raise e  # Re-raise to trigger retry
+
     except OSError as e:
         if e.errno == errno.ENOSPC:
             handle_error("StorageError", "No space left on device.")
         else:
             handle_error("APIError", f"An OS error occurred with Gemini: {e}")
-        return f"[OS error: {e}]"
+        raise e  # Re-raise to trigger retry
+
     except Exception as e:
         handle_error("APIError", f"Failed to generate response from Gemini: {e}")
-        return f"[Unexpected error: {e}]"
+        raise e  # Re-raise to trigger retry

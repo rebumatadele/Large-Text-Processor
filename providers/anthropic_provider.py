@@ -14,7 +14,7 @@ import errno
 # Define the exceptions to catch
 ANTHROPIC_EXCEPTIONS = (CurlError, HTTPError, ConnectionError, Timeout)
 
-@retry(max_retries=5, initial_wait=5, backoff_factor=2, exceptions=ANTHROPIC_EXCEPTIONS)
+@retry(max_retries=10, initial_wait=2, backoff_factor=2, exceptions=ANTHROPIC_EXCEPTIONS)
 def generate_with_anthropic(prompt, api_key):
     headers = {
         'x-api-key': api_key,
@@ -33,29 +33,31 @@ def generate_with_anthropic(prompt, api_key):
         if response.status_code == 200:
             response_json = response.json()
             content = response_json.get("content")
+            print(content)
             if content:
                 if isinstance(content, list):
                     return "".join([item.get("text", "") for item in content])
                 return content
             else:
                 handle_error("ProcessingError", "No content field in Anthropic response.")
-                return "No content field in response."
+                raise ValueError("No content field in response.")
         elif response.status_code == 429:
             handle_error("APIError", "Anthropic rate limit exceeded. Please wait before retrying.")
-            return "[Rate limit exceeded.]"
+            raise HTTPError("Anthropic rate limit exceeded. Please wait before retrying.")
         else:
             error_message = response.json().get('error', {}).get('message', 'Unknown error')
             handle_error("APIError", f"Anthropic Error: {response.status_code} - {error_message}")
-            return f"[Anthropic API error: {error_message}]"
+            raise HTTPError(f"Anthropic API error: {error_message}")
     except ANTHROPIC_EXCEPTIONS as e:
         handle_error("APIError", f"Failed to connect to Anthropic service: {e}")
-        return f"[Error connecting to Anthropic: {e}]"
+        raise e  # Re-raise to trigger retry
     except OSError as e:
         if e.errno == errno.ENOSPC:
             handle_error("StorageError", "No space left on device.")
+            raise e  # Re-raise as it's a critical error
         else:
             handle_error("APIError", f"An OS error occurred with Anthropic: {e}")
-        return f"[OS error: {e}]"
+            raise e  # Re-raise to trigger retry
     except Exception as e:
         handle_error("APIError", f"An unexpected error occurred with Anthropic: {e}")
-        return f"[Unexpected error: {e}]"
+        raise e  # Re-raise to trigger retry
