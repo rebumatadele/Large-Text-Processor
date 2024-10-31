@@ -439,6 +439,6 @@ with st.container():
         st.download_button(
             label=f"💾 Download Output for {file_name}",
             data=response_text,
-            file_name=f"{sanitize_file_name(file_name)}_final.txt",
+            file_name=f"{sanitize_file_name(file_name)}_processed.txt",
             mime="text/plain"
         )
